@@ -3,7 +3,7 @@ import shoes from "./assets/shoes.png";
 import edit from "./assets/edit.svg";
 import { ProductCard, ProductFooter, ProductHeader, ProductImage, ProductInfo, ProductStat, ProductStats } from './components/ui/product-card';
 import { Button } from './components/ui/button';
-
+import placeholder from "./assets/placeholder.png";
 function App() {
 
   const product =  {
@@ -19,21 +19,20 @@ function App() {
 
   return (
 <div className='app grid grid-cols-4 gap-2'>
-    <ProductCard>
+    <ProductCard onClose={() => console.log("Closed!")}>
       <ProductHeader>
-      <ProductImage src={product.image} alt="Product Image" className='border-[0.82px] border-[(var--card-border)]'/>
+      <ProductImage src={product.image} fallbackSrc={placeholder} alt="Product Image" className='border'/>
       <ProductInfo title={product.title}
-      onClose={() => console.log("Closed!")}
         actions={
-        <Button variant="tags" size="sm" className="text-[var(--text-color-dark)] bg-[var(--light-gray)]">
+        <Button variant="tags" size="sm" className="text-foreground bg-light-gray">
         Edit Offer
        </Button>}
        tags={
       <>
-      <Button variant="tags" size="sm" className="text-[var(--primary)] bg-[var(--light-blue)]">
+      <Button variant="tags" size="sm" className="text-primary bg-accent">
         2 Variants
       </Button>
-      <Button variant="tags" size="sm" className="text-[var(--orange)] bg-[var(--light-orange)]">
+      <Button variant="tags" size="sm" className="text-warning bg-warning/10">
         No Discount
         <img src={edit} width="13" alt="Edit Icon" />
       </Button>
@@ -41,7 +40,7 @@ function App() {
     }
     />
       </ProductHeader>
-      <div className='border-[0.82px] border-[var(--card-border)] w-full'></div>
+      <div className='border-[0.82px] w-full'></div>
       <ProductStats>
             <ProductStat label="Views" value={product.views} />
             <ProductStat label="Conversion" value={product.conversion} />
@@ -52,7 +51,6 @@ function App() {
       Create A/B Test
       </ProductFooter>
     </ProductCard>
-    <Button variant="default">Close</Button>
     </div>
   )
 }
